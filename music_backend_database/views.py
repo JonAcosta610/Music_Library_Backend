@@ -18,3 +18,10 @@ def music_list(request):
             return Response(serializer.data, status=201)
         else:
             return Response(serializer.data, status=400)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def music_detail(request, pk):
+    music = get_object_or_404(Music, pk=pk)
+    if request.method == 'GET':
+        MusicSerializer = MusicSerializer(music)
+        return Response(serializer.data)
